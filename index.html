@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <title>Pace Calculator</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+    <meta name="description" content="This free pace calculator computes pace, distance and time by setting values of two variables. You can use it for training purposes.">
+    <link rel="preload" href="./assets/fonts/inter-v12-latin-regular.woff2" as="font" crossorigin type="font/woff2">
+    <link rel="preload" href="./assets/fonts/inter-v12-latin-500.woff2" as="font" crossorigin type="font/woff2">
+    <link rel="preload" href="./assets/fonts/inter-v12-latin-600.woff2" as="font" crossorigin type="font/woff2">
+    <link rel="preload" href="./assets/fonts/inter-v12-latin-800.woff2" as="font" crossorigin type="font/woff2">
+    <script type="text/javascript">
+        window._ = document.getElementById.bind(document);
+        window.$ = document.querySelector.bind(document);
+        window.$$ = document.querySelectorAll.bind(document);
+        window.defaultSystem = "imperial";
+        localStorage.setItem("theme", "light");
+    </script>
+    <link rel="stylesheet" href="./assets/css/main.min.css" />
+    <script src="./assets/js/all-calculators.js" defer></script>
+</head>
+<body style="background-color: transparent !important; min-height: 0 !important">
+
+<div style="width: 100%;">
+    <div style="width:350px;float:left;padding: 15px;">
+        <div class="calculator-settings">
+            <div class="calculator-setting" id="calculator_form">
+                <div class="calculator-content calculator-content--bookmarks">
+                	<button class="tab-item tab-item--active" onclick="switchTab(event, 0)">Pace</button>
+                	<button class="tab-item" onclick="switchTab(event, 1)">Time</button>
+                	<button class="tab-item" onclick="switchTab(event, 2)">Distance</button>
+                </div>
+                <div class="calculator-content col tab tab--active" data-tab="0">
+                	<div class="input-wrapper row">
+                		<label class="input col">
+                				<p class="input__title">Time</p>
+                		
+                			<div class="input-field row">
+                				<input type="text" class="input-field__input "  placeholder="hh:mm:ss" data-inputmask="'mask': '99:99:99', 'placeholder': 'hh:mm:ss'" value="01:20:00" id="time_pace" />
+                			</div>
+                		</label>		<label class="input col ">
+                			<p class="input__title">Distance</p>
+                			<div class="input-field row">
+                				
+                				<input type="text" class="input-field__input imperial-system-item" id="distance_pace_imperial" data-target="distance_pace" data-formula="value / 1.609344" value="5" onchange="sysnumconv(this)"  />
+                				<span class="input-field__hint imperial-system-item">miles</span>
+                		
+                				
+                				<input type="text" class="input-field__input metric-system-item system-item-hidden" id="distance_pace" data-target="distance_pace" data-formula="value * 1.609344" value="8.04672" onchange="sysnumconv(this)"  />
+                				<span class="input-field__hint metric-system-item system-item-hidden">km</span>
+                			</div>
+                		</label>
+                	</div>
+                	<div class="input-wrapper row">
+                		<label class="input col ">
+                			<p class="input__title">Or Pick an Event</p>
+                			<div class="dropdown-wrapper">
+                				<div class="input-field row " tabindex="0">
+                					<select class="input-field__text" onchange="changeDistance(this)" id="pace_type">
+                							<option value="Marathon" >
+                							Marathon
+                							</option>
+                							<option value="Half-Marathon" >
+                							Half-Marathon
+                							</option>
+                							<option value="1K" >
+                							1K
+                							</option>
+                							<option value="5K" >
+                							5K
+                							</option>
+                							<option value="10K" >
+                							10K
+                							</option>
+                							<option value="1 Mile" >
+                							1 Mile
+                							</option>
+                							<option value="5 Miles" selected>
+                							5 Miles
+                							</option>
+                							<option value="10 Miles" >
+                							10 Miles
+                							</option>
+                							<option value="800 Meters" >
+                							800 Meters
+                							</option>
+                							<option value="1500 Meters" >
+                							1500 Meters
+                							</option>
+                					</select>
+                				</div>
+                			</div>
+                		</label>	</div>
+                </div>
+                <div class="calculator-content col tab" data-tab="1">
+                	<div class="input-wrapper row">
+                		<label class="input col   ">
+                			<p class="input__title">Distance</p>
+                			<div class="input-field row">
+                				<input type="text" class="input-field__input" placeholder=""  id="distance_time" value="5"  />
+                					<span class="input-field__hint">kilometers</span>
+                			</div>
+                		
+                		
+                		</label>	</div>
+                	<div class="input-wrapper row">
+                		<label class="input col">
+                				<p class="input__title">Pace</p>
+                		
+                			<div class="input-field row">
+                				<input type="text" class="input-field__input "  placeholder="hh:mm:ss" data-inputmask="'mask': '99:99:99', 'placeholder': 'hh:mm:ss'" value="00:08:00" id="pace_time" />
+                				<span class="input-field__hint">per kilometer</span>
+                			</div>
+                		</label>	</div>
+                </div>
+                <div class="calculator-content col tab" data-tab="2">
+                	<div class="input-wrapper row">
+                		<label class="input col">
+                				<p class="input__title">Time</p>
+                		
+                			<div class="input-field row">
+                				<input type="text" class="input-field__input "  placeholder="hh:mm:ss" data-inputmask="'mask': '99:99:99', 'placeholder': 'hh:mm:ss'" value="12:30:00" id="time_distance" />
+                			</div>
+                		</label>	</div>
+                	<div class="input-wrapper row">
+                		<label class="input col">
+                				<p class="input__title">Pace</p>
+                		
+                			<div class="input-field row">
+                				<input type="text" class="input-field__input "  placeholder="hh:mm:ss" data-inputmask="'mask': '99:99:99', 'placeholder': 'hh:mm:ss'" value="00:08:00" id="pace_distance" />
+                				<span class="input-field__hint">per kilometer</span>
+                			</div>
+                		</label>	</div>
+                </div>
+                <div class="calculator-content calculator-content--gray calculator-content--footer calculator-content--small row tab tab--active" data-tab="0">
+                
+                
+                		<button class="system-switcher" onclick="toggleSystem(this)">
+                			<div class="system-switcher__circle"></div>
+                			<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                	<path d="M10.5 9.5H10C9.44772 9.5 9 9.05228 9 8.5V2.5M4.5 2.5H3.5C2.94772 2.5 2.5 2.94772 2.5 3.5L2.5 9.5M7.5 4.5L10.5 4.5M1.5 5.5L4.5 5.5" stroke="white" stroke-width="2" stroke-linecap="round"></path>
+                </svg>
+                			<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                	<path d="M2 3.5L2 8.5M2 8L2 5.5C2 4.39543 2.89543 3.5 4 3.5C5.10457 3.5 6 4.39543 6 5.5M6 5.5L6 8.5M6 5.5L6 8M6 5.5C6 4.39543 6.89543 3.5 8 3.5C9.10457 3.5 10 4.39543 10 5.5V8.5" stroke="white" stroke-width="2" stroke-linecap="round"></path>
+                </svg>
+                		</button>
+                
+                		<script type="text/javascript">
+                			$$(".imperial-system-item, .metric-system-item").forEach(function(element, index){
+                				element.classList.remove("system-item-hidden");
+                			});
+                			$$((defaultSystem == "metric") ? ".imperial-system-item" : ".metric-system-item").forEach(function(element, index){
+                				element.classList.add("system-item-hidden");
+                			});
+                			if(defaultSystem == "metric") $('.system-switcher').classList.add('system-switcher--active');
+                		</script>
+                
+                
+                	<button class="button button--primary ml-auto" onclick="calculate(this)">Calculate</button>
+                </div>
+                
+                
+                
+                
+                	<script type="text/javascript" src="./assets/js/calculator.js"></script>
+                <div class="calculator-content calculator-content--gray calculator-content--footer calculator-content--small row tab " data-tab="1">
+                
+                
+                
+                
+                	<button class="button button--primary ml-auto" onclick="calculateTime(this)">Calculate</button>
+                </div>
+                
+                
+                
+                
+                <div class="calculator-content calculator-content--gray calculator-content--footer calculator-content--small row tab " data-tab="2">
+                
+                
+                
+                
+                	<button class="button button--primary ml-auto" onclick="calculateDistance(this)">Calculate</button>
+                </div>
+                
+                
+                
+                
+            </div>
+        </div>
+    </div>
+    <div style="float:left;padding: 15px; overflow: scroll;">
+        <div class="calculator-result calculator-result--error col" id="error-box">
+        	<div class="row">
+        		<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        	<path fill-rule="evenodd" clip-rule="evenodd" d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18ZM8.70711
+        						7.29289C8.31658 6.90237 7.68342 6.90237 7.29289 7.29289C6.90237 7.68342 6.90237 8.31658 7.29289 8.70711L8.58579 10L7.29289 11.2929C6.90237 11.6834 6.90237 12.3166 7.29289
+        						12.7071C7.68342 13.0976 8.31658 13.0976 8.70711 12.7071L10 11.4142L11.2929 12.7071C11.6834 13.0976 12.3166 13.0976 12.7071 12.7071C13.0976 12.3166 13.0976 11.6834 12.7071
+        						11.2929L11.4142 10L12.7071 8.70711C13.0976 8.31658 13.0976 7.68342 12.7071 7.29289C12.3166 6.90237 11.6834 6.90237 11.2929 7.29289L10 8.58579L8.70711 7.29289Z" fill="#F87171" class="dark:fill-red-200"></path>
+        </svg>
+        		<p class="calculator-error__title">There was an error with your calculation.</p>
+        	</div>
+        	<div class="col" id="error-list">
+        	</div>
+        </div>        <span id="calculator_result"><div class="calculator-result col tab tab--active" data-tab="0">
+	<div class="result-table__wrapper">
+		<table class="result-table">
+			<thead class="dark">
+			<tr>
+				<th class="dark indigo" colspan="2">Result</th>
+			</tr>
+			</thead>
+			<tbody id="result_0">
+			<tr>
+				<td colspan="2">16 minutes per mile</td>
+			</tr>
+			<tr>
+				<td colspan="2">9 minutes 57 seconds per kilometer</td>
+			</tr>
+			<tr>
+				<td colspan="2">3.75 miles/hour</td>
+			</tr>
+			<tr>
+				<td colspan="2">6.035 kilometers/hour</td>
+			</tr>
+			<tr>
+				<td colspan="2">100.584 meters/minute</td>
+			</tr>
+			<tr>
+				<td colspan="2">1.676 meters/second</td>
+			</tr>
+			<tr>
+				<th colspan="2">At this pace, the times required for popular race distances are:</th>
+			</tr>
+			<tr>
+				<td>Marathon at 6 hours 59 minutes 30 seconds</td>
+				<td>Half-Marathon at 3 hours 29 minutes 45 seconds</td>
+			</tr>
+			<tr>
+				<td>10K at 1 hour 39 minutes 25 seconds</td>
+				<td>5K at 49 minutes 43 seconds</td>
+			</tr>
+			<tr>
+				<td>1K at 9 minutes 57 seconds</td>
+				<td>1 Mile at 16 minutes</td>
+			</tr>
+			<tr>
+				<td>5 Miles at 1 hour 20 minutes</td>
+				<td>10 Miles at 2 hours 39 minutes 60 seconds</td>
+			</tr>
+			<tr>
+				<td>800 Meters at 7 minutes 57 seconds</td>
+				<td>1500 Meters at 14 minutes 55 seconds</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="calculator-result col tab" data-tab="1">
+	<div class="result-table__wrapper">
+		<table class="result-table">
+			<thead class="dark">
+			<tr>
+				<th class="dark indigo" colspan="2">Result</th>
+			</tr>
+			</thead>
+			<tbody id="result_1">
+			<tr>
+				<td colspan="2">The time required will be: 40 minutes</td>
+			</tr>
+			<tr>
+				<th colspan="2">At this pace, the times required for popular race distances are:</th>
+			</tr>
+			<tr>
+				<td>Marathon at 5 hours 37 minutes 34 seconds</td>
+				<td>Half-Marathon at 2 hours 48 minutes 47 seconds</td>
+			</tr>
+			<tr>
+				<td>10K at 1 hour 20 minutes</td>
+				<td>5K at 40 minutes</td>
+			</tr>
+			<tr>
+				<td>1K at 8 minutes</td>
+				<td>1 Mile at 12 minutes 52 seconds</td>
+			</tr>
+			<tr>
+				<td>5 Miles at 1 hour 4 minutes 22 seconds</td>
+				<td>10 Miles at 2 hours 8 minutes 45 seconds</td>
+			</tr>
+			<tr>
+				<td>800 Meters at 6 minutes 24 seconds</td>
+				<td>1500 Meters at 12 minutes</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="calculator-result col tab" data-tab="2">
+	<div class="result-table__wrapper">
+		<table class="result-table">
+			<thead class="dark">
+			<tr>
+				<th class="dark indigo" colspan="2">Result</th>
+			</tr>
+			</thead>
+			<tbody id="result_2">
+			<tr>
+				<td colspan="2">58.25 Miles</td>
+			</tr>
+			<tr>
+				<td colspan="2">93.75 Kilometers</td>
+			</tr>
+			<tr>
+				<td colspan="2">93750 Meters</td>
+			</tr>
+			<tr>
+				<td colspan="2">102525.94 Yards</td>
+			</tr>
+			<tr>
+				<th colspan="2">At this pace, the times required for popular race distances are:</th>
+			</tr>
+			<tr>
+				<td>Marathon at 5 hours 37 minutes 34 seconds</td>
+				<td>Half-Marathon at 2 hours 48 minutes 47 seconds</td>
+			</tr>
+			<tr>
+				<td>10K at 1 hour 20 minutes</td>
+				<td>5K at 40 minutes</td>
+			</tr>
+			<tr>
+				<td>1K at 8 minutes</td>
+				<td>1 Mile at 12 minutes 52 seconds</td>
+			</tr>
+			<tr>
+				<td>5 Miles at 1 hour 4 minutes 22 seconds</td>
+				<td>10 Miles at 2 hours 8 minutes 45 seconds</td>
+			</tr>
+			<tr>
+				<td>800 Meters at 6 minutes 24 seconds</td>
+				<td>1500 Meters at 12 minutes</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</div></span>
+    </div>
+</div>
+
+<script async src="./assets/js/lib/math.min.js"></script>
+<script defer src="./assets/js/functions.js"></script>
+
+</body>
+</html>
