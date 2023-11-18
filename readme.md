@@ -1,4 +1,4 @@
-# Pace Calculator WordPress Widget by [Calculator.iO](https://www.calculator.io/ "Calculator.iO Homepage")
+# Pace Calculator Widget for WordPress
 
 This free pace calculator computes pace, distance and time by setting values of two variables. You can use it for training purposes.
 
