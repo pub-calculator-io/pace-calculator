@@ -7,7 +7,7 @@ This free pace calculator computes pace, distance and time by setting values of 
 
 ## Installation
 
-1. [Download](https://github.com/pub-calculator-io/age-calculator/archive/refs/heads/master.zip) the ZIP file of this repository.
+1. [Download](https://github.com/pub-calculator-io/pace-calculator/archive/refs/heads/master.zip) the ZIP file of this repository.
 2. Upload the /pace-calculator-master/ folder to the /wp-content/plugins/ directory.
 3. Activate the [Pace Calculator](https://www.calculator.io/pace-calculator/ "Pace Calculator Homepage") plugin through the "Plugins" menu in WordPress.
 
