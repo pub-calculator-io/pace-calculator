@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Pace Calculator by www.calculator.io
+Plugin Name: CI Pace calculator
 Plugin URI: https://www.calculator.io/pace-calculator/
 Description: This free pace calculator computes pace, distance and time by setting values of two variables. You can use it for training purposes.
 Version: 1.0.0

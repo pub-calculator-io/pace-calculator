@@ -1,4 +1,4 @@
-=== Pace Calculator by www.calculator.io ===
+=== CI Pace calculator ===
 Contributors: calculatorio
 Tags: pace calculator, running pace, marathon pace, race time, jogging speed, training calculator, distance running, running speed, workout pace, fitness calculator
 Requires at least: 5.0
