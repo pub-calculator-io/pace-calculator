@@ -1,6 +1,6 @@
 # Pace Calculator Widget for WordPress
 
-This free pace calculator computes pace, distance and time by setting values of two variables. You can use it for training purposes.
+Easily calculate running pace, distance, or finish time with our free Pace Calculator. Perfect for 5K, half-marathon, and marathon training plans.
 
 ![Pace Calculator Input Form](/assets/images/screenshot-1.png "Pace Calculator Input Form")
 
@@ -11,8 +11,8 @@ This free pace calculator computes pace, distance and time by setting values of 
 3. Activate the [Pace Calculator](https://www.calculator.io/pace-calculator/ "Pace Calculator Homepage") plugin through the "Plugins" menu in WordPress.
 
 ## Usage
-* Add the shortcode `[ci_pace_calculator]` to your page, post or sidebar.
-* Or add the following code: `<?php display_ci_pace_calculator(); ?>` to your template where you would like the Pace Calculator to appear.
+* Add the shortcode `[calcio_pace_calculator]` to your page, post or sidebar.
+* Or add the following code: `<?php display_calcio_pace_calculator(); ?>` to your template where you would like the Pace Calculator to appear.
 
 ## Libraries in Use
 1. https://mathjs.org/
